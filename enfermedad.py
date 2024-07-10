@@ -1,8 +1,9 @@
 class Enfermedad:
-    def __init__(self, infeccion_probable, promedio_pasos, infeccion_estrecho):
+    def __init__(self, infeccion_probable, promedio_pasos, infeccion_estrecho, tasarecuperacion):
         self.__infeccion_probable = infeccion_probable # Probaibilidad de infeccion de una persona (B)
         self.__promedio_pasos = promedio_pasos # Días con la infección
         self.__infeccion_estrecho = infeccion_estrecho # Probabilidad de infeccion a un contacto estrecho
+        self.__tasarecuperacion = tasarecuperacion # Tasa en que un ciudadano se recupera de la enfermedad
     
     # gets y sets de los atributos
     def set_infeccion_probable(self, infeccion_probable):
@@ -22,3 +23,9 @@ class Enfermedad:
 
     def get_infeccion_estrecho(self):
         return self.__infeccion_estrecho
+    
+    def set_tasarecuperacion(self, tasarecuperacion):
+        self.__tasarecuperacion = tasarecuperacion
+
+    def get_tasarecuperacion(self):
+        return self.__tasarecuperacion
