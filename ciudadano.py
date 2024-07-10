@@ -1,4 +1,4 @@
-import random
+from enfermedad import Enfermedad # Para ocupar la tasa de recuperación 
 
 class Ciudadano:
     def __init__(self, comunidad, _id, nombre, apellido, familia, enfermedad):
@@ -12,6 +12,8 @@ class Ciudadano:
         self.__familia = familia
         self.__enfermedad = enfermedad
         self.__estado = "S"
+        self.__contador = None
+
 
     # gets y sets de los atributos
     def set_comunidad(self, comunidad):
@@ -55,4 +57,30 @@ class Ciudadano:
 
     def get_estado(self):
         return self.__estado
+    
+    def set_contador(self, contador):
+        self.__contador = contador
+
+    def iniciar_contagio(self):
+        """
+        Inicializa el contador de la duración del contagio con la tasa de recuperación de la enfermedad
+        """
+        self.__contador = self.__enfermedad.get_tasarecuperacion()
+
+    def duracion_contagio(self):
+        """
+        Simula la duración del contagio, en este caso, un contador que decrementa en 1 cada día.    
+        """
+        if self.__contador is not None:
+            self.__contador -= 1
+
+    def actualizar_estado(self):
+        """
+        Actualiza el estado del ciudadano basado en la tasa de recuperación de la enfermedad
+        """
+        if self.__estado == "I" and self.__contador is not None:
+            self.duracion_contagio()
+            if self.__contador <= 0:
+                self.__estado = "R"
+                self.__contador = None
     
