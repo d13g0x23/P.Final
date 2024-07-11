@@ -1,4 +1,6 @@
 from enfermedad import Enfermedad
+from ciudadano import Ciudadano
+
 class Comunidad:
     def __init__(self, num_ciudadanos, promedio_conexion_fisica, enfermedad, num_infectados, probabilidad_conexion_fisica):
         """
@@ -7,7 +9,9 @@ class Comunidad:
             enfermedad = Nombre de la enfermedad :v
             num_infectados = Población de infectados iniciales
             probabilidad_conexion_fisica = Probabiidad de que se junte con más personas
-            ciudadanos = Lista vacia que recibira a objeto ciudadano
+            susceptibles = Lista de ciudadanos susceptibles
+            infectados = Lista de ciudadanoos infectados
+            recuperados = Lista de ciudadanos recuperados
         """
         self.__num_ciudadanos = num_ciudadanos # N (Población modelo SIR)
         self.__promedio_conexion_fisica = promedio_conexion_fisica 
@@ -67,3 +71,10 @@ class Comunidad:
 
     def get_recuperados(self):
         return self.__recuperados
+
+    # Métodos para la clase comunidad
+    def bicho_raro(self, enfermedad): # Asigna una instancia de la clase Enfermedad al atributo self.__enfermedad
+        if isinstance(enfermedad, Enfermedad):
+            self.__enfermedad = enfermedad
+        else:
+            print("Error: El objeto no es una instancia de Enfermedad")
