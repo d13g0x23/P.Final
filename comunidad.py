@@ -1,5 +1,6 @@
 from enfermedad import Enfermedad
 from ciudadano import Ciudadano
+import random
 
 class Comunidad:
     def __init__(self, num_ciudadanos, promedio_conexion_fisica, enfermedad, num_infectados, probabilidad_conexion_fisica):
@@ -21,8 +22,7 @@ class Comunidad:
         self.__susceptibles = []
         self.__infectados = []
         self.__recuperados = []
-        self.__familias = {} # Diccionario para agrupar ciudadadanos por familia
-        self.__ciudadanos_por_id = {} # Diccionario para accdeder a ciudadanos por su ID
+        self.__ciudadanos = {} # Diccionario para mantener a todos los ciudadanos
 
 
     # gets y sets de los atributos
@@ -81,31 +81,43 @@ class Comunidad:
         else:
             print("Error: El objeto no es una instancia de Enfermedad")
 
-    def agregar_ciudadano(self, ciudadano):
+    def crear_ciudadano(self, _id, nombre, apellido, familia):
         """
-        Agrega un ciudadano a la comunidad y lo agrupa por su familia e ID
+        Crea un nuevo ciudadano y lo agrega a la comunidad
         """
+        enfermedad = self.__enfermedad # Asigna la enfermedad definida para toda la comunidad
+        ciudadano = Ciudadano(self, _id, nombre, apellido, familia, enfermedad)
         self.__susceptibles.append(ciudadano)
 
         # Agrupa por familia
-        familia = ciudadano.get_familia()
-        if familia in self.__familias:
-            self.__familias[familia].append(ciudadano)
+        if familia in self.__ciudadanos:
+            self.__ciudadanos[familia].append(ciudadano)
         else:
-            self.__familias[familia] = [ciudadano]
+            self.__ciudadanos[familia] = [ciudadano]
 
         # Agrupa por ID
-        ciudadano_id = ciudadano.get_id()
-        self.__ciudadanos_por_id[ciudadano_id] = ciudadano
+        self.__ciudadanos[_id] = ciudadano
 
-    def obtener_ciudadano_por_id(self, _id):
-        """
-        Obtiene un ciudadano por su ID
-        """
-        return self.__ciudadanos_por_id(_id)
+        return ciudadano
     
-    def obtener_ciudadanos_por_familia(self, familia):
+    def contagiar_en_familia(self, familia):
         """
-        Obtinene todos los ciudadanos de una familia especifica
+        Intenta contagiar a todos los ciudadanos de una familia específica
         """
-        return self.__familias.get(familia, [])
+        ciudadanos_en_familia = self.__ciudadanos.get(familia, [])
+        
+        for ciudadano in ciudadanos_en_familia:
+            if ciudadano.get_estado() == "S":
+                if self.__probabilidad_conexion_fisica >= random.random():
+                    ciudadano.infectar()
+                    print(f"{ciudadano.get_nombre()} {ciudadano.get_apellido()} ha sido contagiado en la familia {familia}")
+
+    def contagiar_por_id(self, ciudadano_id):
+        """
+        Intenta contagiar a un ciudadano por su ID
+        """
+        ciudadano = self.__ciudadanos.get(ciudadano_id)
+        if ciudadano and ciudadano.get_estado() == "S":
+            if self.__probabilidad_conexion_fisica >= random.random():
+                ciudadano.infectar()
+                print(f"{ciudadano.get_nombre()} {ciudadano.get_apellido()} ha sido contagiado por ID {ciudadano_id}")
