@@ -1,5 +1,4 @@
 from enfermedad import Enfermedad # Para ocupar la tasa de recuperación (dias que esta contagiado o con la infección)
-import random
 
 class Ciudadano:
     def __init__(self, comunidad, _id, nombre, apellido, familia, enfermedad):
@@ -93,19 +92,3 @@ class Ciudadano:
         if self.__estado == "S":
             self.__estado = "I"
             self.iniciar_contagio()
-
-    def contagiar(self):
-        """
-        Intenta contagiar a otros ciudadanos de la misma familia
-        """
-        comunidad = self.__comunidad
-        familia = self.__familia
-        ciudadanos_en_familia = comunidad.obtener_ciudadanos_por_familia(familia)
-
-        for ciudadano in ciudadanos_en_familia:
-            if ciudadano is not self and ciudadano.get_estado() == "S":
-                if comunidad.get_probabilidad_conexion_fisica() >= random.random():
-                    ciudadano.infectar()
-                    print(f"{self.__nombre} {self.__apellido} ha contagiado a {ciudadano.get_nombre()} {ciudadano.get_apellido()}")
-                    break # Un ciudadano solo puede contagiar a uno por día
-                
