@@ -21,6 +21,8 @@ class Comunidad:
         self.__susceptibles = []
         self.__infectados = []
         self.__recuperados = []
+        self.__familias = {} # Diccionario para agrupar ciudadadanos por familia
+        self.__ciudadanos_por_id = {} # Diccionario para accdeder a ciudadanos por su ID
 
 
     # gets y sets de los atributos
@@ -78,3 +80,32 @@ class Comunidad:
             self.__enfermedad = enfermedad
         else:
             print("Error: El objeto no es una instancia de Enfermedad")
+
+    def agregar_ciudadano(self, ciudadano):
+        """
+        Agrega un ciudadano a la comunidad y lo agrupa por su familia e ID
+        """
+        self.__susceptibles.append(ciudadano)
+
+        # Agrupa por familia
+        familia = ciudadano.get_familia()
+        if familia in self.__familias:
+            self.__familias[familia].append(ciudadano)
+        else:
+            self.__familias[familia] = [ciudadano]
+
+        # Agrupa por ID
+        ciudadano_id = ciudadano.get_id()
+        self.__ciudadanos_por_id[ciudadano_id] = ciudadano
+
+    def obtener_ciudadano_por_id(self, _id):
+        """
+        Obtiene un ciudadano por su ID
+        """
+        return self.__ciudadanos_por_id(_id)
+    
+    def obtener_ciudadanos_por_familia(self, familia):
+        """
+        Obtinene todos los ciudadanos de una familia especifica
+        """
+        return self.__familias.get(familia, [])
