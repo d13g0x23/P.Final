@@ -1,17 +1,16 @@
 class Enfermedad:
-    def __init__(self, infeccion_probable, promedio_pasos, infeccion_estrecho, tasarecuperacion, nombre_enfermedad):
+    def __init__(self, infeccion_probable, promedio_pasos, infeccion_estrecho, tasarecuperacion):
         """
             infeccion_probable = Probaibilidad de infeccion de una persona (B)
-            promedio_pasos = Días con la infección
+            promedio_pasos = Son los DÍAS que esta CONTAGIADO o con la infección
             infeccion_estrecho = Probabilidad de infeccion a un contacto estrecho
-            tasarecuperacion = Tasa en que un ciudadano se recupera de la enfermedad (en días)
+            tasarecuperacion = Son los DÍAS en que un ciudadano se recupera de la enfermedad
             nombre_enfermedad = Nombre de la enfermedad :v
         """
-        self.__infeccion_probable = infeccion_probable 
+        self.__infeccion_probable = infeccion_probable # B (tasa de transmision modelo SIR)
         self.__promedio_pasos = promedio_pasos 
         self.__infeccion_estrecho = infeccion_estrecho 
-        self.__tasarecuperacion = tasarecuperacion 
-        self.__nombre_enfermedad = nombre_enfermedad
+        self.__tasarecuperacion = tasarecuperacion
     
     # gets y sets de los atributos
     def set_infeccion_probable(self, infeccion_probable):
@@ -37,9 +36,4 @@ class Enfermedad:
 
     def get_tasarecuperacion(self):
         return self.__tasarecuperacion
-    
-    def set_nombre_enfermedad(self, nombre_enfermedad):
-        self.__nombre_enfermedad = nombre_enfermedad
-
-    def get_nombre_enfermedad(self):
-        return self.__nombre_enfermedad
+       
