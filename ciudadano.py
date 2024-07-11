@@ -1,4 +1,4 @@
-from enfermedad import Enfermedad # Para ocupar la tasa de recuperación 
+from enfermedad import Enfermedad # Para ocupar la tasa de recuperación (dias que esta contagiado o con la infección)
 
 class Ciudadano:
     def __init__(self, comunidad, _id, nombre, apellido, familia, enfermedad):
@@ -61,11 +61,12 @@ class Ciudadano:
     def set_contador(self, contador):
         self.__contador = contador
 
+    # Métodos para la clase ciudadano
     def iniciar_contagio(self):
         """
-        Inicializa el contador de la duración del contagio con la tasa de recuperación de la enfermedad
+        Inicializa el contador de la duración del contagio con la tasa de recuperación  de la enfermedad
         """
-        self.__contador = self.__enfermedad.get_tasarecuperacion()
+        self.__contador = self.__enfermedad.get_tasarecuperacion() # Son los días que esta contagiado o que esta con la infección
 
     def duracion_contagio(self):
         """
@@ -84,3 +85,10 @@ class Ciudadano:
                 self.__estado = "R"
                 self.__contador = None
     
+    def infectar(self):
+        """
+        Cambia el estado del ciudadano de "S" a "I" y inicializa el contagio
+        """
+        if self.__estado == "S":
+            self.__estado = "I"
+            self.iniciar_contagio()
