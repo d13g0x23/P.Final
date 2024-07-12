@@ -101,6 +101,22 @@ class Comunidad:
 
         return ciudadano
     
+    def cargar_ciudadanos_desde_csv(self, archivo_csv, num_familias):
+        """
+        Carga ciudadanos desde un archivo CSV y los agrega a la comunidad
+        """
+        df = pd.read_csv(archivo_csv)
+        familias = [f"Familia_{i}" for i in range(1, num_familias + 1)]
+
+        for idx, row in df.iterrows():
+            if idx >= self.__num_ciudadanos:
+                break
+            _id = idx + 1
+            nombre = row['nombre']
+            apellido = row['apellido']
+            familia = random.choice(familias)
+            self.crear_ciudadano(_id, nombre, apellido, familia)
+    
     def contagiar_en_familia(self, familia):
         """
         Intenta contagiar a todos los ciudadanos de una familia específica
