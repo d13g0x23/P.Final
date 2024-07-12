@@ -7,6 +7,7 @@ class MainWindow(Gtk.ApplicationWindow):
         super().__init__(*args, **kwargs)
         self.app = self.get_application()
         self.set_default_size(1920, 1080)
+        self.connect("destroy", self.on_destroy)
         # Header Bar
         header_bar = Gtk.HeaderBar.new()
         self.set_titlebar(titlebar=header_bar)
@@ -92,6 +93,9 @@ class MainWindow(Gtk.ApplicationWindow):
 
     def on_start_button_clicked(self, button):
         print("Ta funcionando")
+
+    def on_destroy(self, window):
+        self.close()
 
 class MyApp(Gtk.Application):
     def __init__(self, *args, **kwargs):
