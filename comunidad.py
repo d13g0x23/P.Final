@@ -1,5 +1,6 @@
 from enfermedad import Enfermedad
 from ciudadano import Ciudadano
+import pandas as pd
 import random
 
 class Comunidad:
@@ -121,3 +122,27 @@ class Comunidad:
             if self.__probabilidad_conexion_fisica >= random.random():
                 ciudadano.infectar()
                 print(f"{ciudadano.get_nombre()} {ciudadano.get_apellido()} ha sido contagiado por ID {ciudadano_id}")
+
+    def determinar_contacto_estrecho(self, ciudadano1, ciudadano2):
+        """
+        Determina si dos ciudadanos tienen un contacto estrecho basado en promedio_pasos y prom_conexion_fisica
+        """
+        prom_conexion_fisica = self.get_promedio_conexion_fisica()
+
+        if prom_conexion_fisica >= random.random():
+            return True
+        else:
+            return False
+        
+    def agrupar_y_contagiar(self):
+        """
+        Agrupa y contagia a los ciudadanos susceptibles basado en contactos estrechos
+        """
+        for familia, ciudadanos in self.__ciudadanos.items():
+            for ciudadano in ciudadanos:
+                if ciudadano.get_estado() == "S":
+                    for otro_ciudadano in ciudadanos:
+                        if otro_ciudadano != ciudadano and self.determinar_contacto_estrecho(ciudadano, otro_ciudadano):
+                            ciudadano.infectar()
+                            print(f"{ciudadano.get_nombre()} {ciudadano.get_apellido()} ha sido contagiado en la familia {familia}")
+                            break # Contagia solo a uno por ciclo
