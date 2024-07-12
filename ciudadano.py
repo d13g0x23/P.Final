@@ -64,9 +64,9 @@ class Ciudadano:
     # Métodos para la clase ciudadano
     def iniciar_contagio(self):
         """
-        Inicializa el contador de la duración del contagio con la tasa de recuperación  de la enfermedad
+        Inicializa el contador de la duración del contagio con promedio_pasos de la enfermedad
         """
-        self.__contador = self.__enfermedad.get_tasarecuperacion() # Son los días que esta contagiado o que esta con la infección
+        self.__contador = self.__enfermedad.get_promedio_pasos() # Son los días que esta contagiado
 
     def duracion_contagio(self):
         """
@@ -92,3 +92,11 @@ class Ciudadano:
         if self.__estado == "S":
             self.__estado = "I"
             self.iniciar_contagio()
+
+    def rescatar_ciudadano(self):
+        """
+        Cambia el estado del ciudadano de "I" a "R" y reinicia el contador
+        """
+        if self.__estado == "I":
+            self.__estado = "R"
+            self.__contador = None
