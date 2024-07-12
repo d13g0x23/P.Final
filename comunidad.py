@@ -162,3 +162,10 @@ class Comunidad:
                             ciudadano.infectar()
                             print(f"{ciudadano.get_nombre()} {ciudadano.get_apellido()} ha sido contagiado en la familia {familia}")
                             break # Contagia solo a uno por ciclo
+
+        # Contagia al azar si no hubo contacto estrecho
+        for ciudadano in self.__susceptibles:
+            if ciudadano.get_estado() == "S":
+                if self.__probabilidad_conexion_fisica >= random.random():
+                    ciudadano.infectar()
+                    print(f"{ciudadano.get_nombre()} {ciudadano.get_apellido()} ha sido contagiado al azar")
