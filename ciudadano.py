@@ -1,5 +1,3 @@
-from enfermedad import Enfermedad # Para ocupar la tasa de recuperación (dias que esta contagiado o con la infección)
-
 class Ciudadano:
     def __init__(self, comunidad, _id, nombre, apellido, familia, enfermedad):
         """S: suceptible
@@ -68,7 +66,7 @@ class Ciudadano:
         """
         self.__contador = self.__enfermedad.get_promedio_pasos() # Son los días que esta contagiado
 
-    def duracion_contagio(self):
+    def duracion_contagio(self):    
         """
         Simula la duración del contagio, en este caso, un contador que decrementa en 1 cada día.    
         """
@@ -77,7 +75,7 @@ class Ciudadano:
 
     def actualizar_estado(self):
         """
-        Actualiza el estado del ciudadano basado en la tasa de recuperación de la enfermedad
+        Actualiza el estado del ciudadano
         """
         if self.__estado == "I" and self.__contador is not None:
             self.duracion_contagio()
