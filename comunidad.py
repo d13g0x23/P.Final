@@ -23,7 +23,7 @@ class Comunidad:
         self.__susceptibles = []
         self.__infectados = []
         self.__recuperados = []
-        self.__ciudadanos = {} # Diccionario para mantener a todos los ciudadanos
+        self.__ciudadanos = [] # Lista para guardar los objetos tipo ciudadano
 
 
     # gets y sets de los atributos
