@@ -103,7 +103,7 @@ class Comunidad:
         self.__susceptibles = []
         self.__infectados = []
         self.__recuperados = []
-        self.__ciudadanos = {}  # Lista para guardar los objetos tipo ciudadano
+        self.__ciudadanos = {}  # Diccionario para guardar los objetos tipo ciudadano
         df = pd.read_csv(archivo_csv)
         familias = [f"Familia_{i}" for i in range(1, self.__num_familias + 1)]
 
