@@ -106,6 +106,7 @@ class Simulador():
                                          prom_pasos,
                                          enfermo=True)
                 contacto.set_enfermedad(nuevo_virus)
+                contacto.set_estado("I") # Cambiar el estado a infectado
                 return True
         return False
 
@@ -120,6 +121,7 @@ class Simulador():
             enfermo = infectado.get_enfermedad().get_enfermo()
             if not enfermo:
                 recuperados.append(infectado)
+                infectado.set_estado("R") # Cambia el estado a recuperado
 
         # Se quitan los recuperados de la lista de enfermos
         for recuperado in recuperados:
@@ -131,6 +133,7 @@ class Simulador():
         for infectado in nuevos_infectados:
             susceptibles.remove(infectado)
             infectados.append(infectado)
+            infectado.set_estado("I") # Cambia el estado a infectado
 
         # Actualizamos la comunidad
         self.__comunidad.set_infectados(infectados)
