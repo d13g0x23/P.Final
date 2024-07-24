@@ -1,12 +1,18 @@
 class Ciudadano:
     def __init__(self, comunidad, _id, nombre,
                  apellido, familia, enfermedad=None):
+        """
+        S = Susceptible
+        I = Infectado
+        R = Recuperado
+        """
         self.__comunidad = comunidad
         self.__id = _id
         self.__nombre = nombre
         self.__apellido = apellido
         self.__familia = familia
         self.__enfermedad = enfermedad
+        self.__estado = "S" 
 
     # gets y sets de los atributos
     def set_comunidad(self, comunidad):
@@ -44,3 +50,10 @@ class Ciudadano:
 
     def get_enfermedad(self):
         return self.__enfermedad
+
+    def set_estado(self, estado):
+        self.__estado = estado
+
+    def get_estado(self):
+        return self.__estado
+    
