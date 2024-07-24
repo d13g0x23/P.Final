@@ -38,11 +38,11 @@ class MainWindow(Gtk.ApplicationWindow):
         # Titulo1
         self.make_label_title("Parametros SIR")
         # Entry1
-        self.entry_infeccion_probable = self.make_entry("Tasa de transmisión [B]", "0.8", "trasmision")
+        self.entry_infeccion_probable = self.make_entry("Tasa de transmisión [B]", "0.3", "trasmision")
         # Entry2
         self.entry_promedio_pasos = self.make_entry("Tasa de transmisión/Promedio pasos [Y]", "18", "pasos")
         # Entry3
-        self.entry_num_ciudadanos = self.make_entry("Población total (ciudadanos) [N]", "10000", "poblacion")
+        self.entry_num_ciudadanos = self.make_entry("Población total (ciudadanos) [N]", "20000", "poblacion")
         # Titulo2
         self.make_label_title("Comunidad")
         # Entry4
@@ -151,7 +151,6 @@ class MainWindow(Gtk.ApplicationWindow):
                        ylabel="Cantidad", colormap=colores, lw=3,
                        figsize=(10,10))
         plt.savefig("Resultado_Simulacion.png")
-        self.load_figure()
 
     def on_destroy(self, window):
         self.close()
